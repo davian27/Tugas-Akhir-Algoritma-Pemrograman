@@ -44,7 +44,7 @@ void writeReport(std::ostream& out, const MeasurementDataset& data, const Analys
     out << "Daya aktif        : " << formatNumber(r.activePowerW) << " W\n"
         << "Daya semu         : " << formatNumber(r.apparentPowerVa) << " VA\n"
         << "Faktor daya       : ";
-    if (r.powerFactorDefined) out << formatNumber(r.powerFactor, 3) << "\n"; else out << "tidak terdefinisi\n";
+    if (r.powerFactorDefined) out << formatNumber(r.powerFactor, 3) << " PF\n"; else out << "tidak terdefinisi\n";
     out << "THD tegangan      : ";
     if (r.thdDefined) out << formatNumber(r.thdPercent) << " %\n"; else out << "tidak tersedia\n";
     if (!r.thdNote.empty()) out << "Catatan THD       : " << r.thdNote << "\n";
@@ -110,7 +110,7 @@ std::string makePdf(const MeasurementDataset& data, const AnalysisResult& r,
     section("DAYA", 552);
     row("Daya aktif", formatNumber(r.activePowerW) + " W", 531);
     row("Daya semu", formatNumber(r.apparentPowerVa) + " VA", 513);
-    row("Faktor daya", r.powerFactorDefined ? formatNumber(r.powerFactor, 3) : "tidak terdefinisi", 495);
+    row("Faktor daya", r.powerFactorDefined ? formatNumber(r.powerFactor, 3) + " PF" : "tidak terdefinisi", 495);
     row("THD tegangan", r.thdDefined ? formatNumber(r.thdPercent) + " %" : "tidak tersedia", 477);
     if (!r.thdDefined && !r.thdNote.empty()) {
         std::string note = pdfText(r.thdNote);

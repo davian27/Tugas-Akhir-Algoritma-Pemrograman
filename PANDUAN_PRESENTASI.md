@@ -40,7 +40,7 @@ Data tegangan dan arus sering kali perlu diperiksa satu per satu. Menghitung nil
 | Frekuensi | Perkiraan banyaknya siklus gelombang per detik, dihitung dari lintasan tegangan melewati nol. |
 | Daya aktif | Rata-rata daya yang dihitung dari pasangan sampel tegangan dan arus. |
 | Daya semu | Perkalian nilai efektif tegangan dan arus. |
-| Faktor daya | Perbandingan daya aktif terhadap daya semu. |
+| Faktor daya (PF) | Perbandingan daya aktif terhadap daya semu; pada tampilan dan laporan diberi label PF. |
 | THD | Perkiraan besarnya komponen harmonisa tegangan dibanding komponen fundamental. Nilai lebih tinggi menunjukkan distorsi harmonisa yang lebih besar menurut perhitungan ini. |
 
 ## Cara menjelaskan diagnosis

@@ -16,7 +16,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
 endobj
 6 0 obj
-<< /Length 2835 >>
+<< /Length 2849 >>
 stream
 q 0.09 0.16 0.25 rg 0 790 595 52 re f Q
 q 0.08 0.78 0.83 rg 42 786 3 38 re f Q
@@ -25,7 +25,7 @@ BT /F2 17 Tf 56 809 Td (POWER QUALITY ANALYZER) Tj ET
 0.30 0.39 0.48 rg
 BT /F1 9 Tf 56 768 Td (Laporan analisis kualitas daya) Tj ET
 0.12 0.18 0.24 rg
-BT /F1 9 Tf 42 742 Td (File: ...\\\\2026 Source Code\\\\Semester 3\\\\Tugas Akhir Algoritma Pemkom\\\\sample_harmonic.csv) Tj ET
+BT /F1 9 Tf 42 742 Td (File: ...am\\\\2026 Source Code\\\\Semester 3\\\\Tugas Akhir Algoritma Pemkom\\\\sample_normal.csv) Tj ET
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 42 725 Td (Jumlah sampel: 1000    Sampling: 5000 Hz) Tj ET
 q 0.07 0.15 0.24 rg 42 690 511 19 re f Q
@@ -34,22 +34,22 @@ BT /F2 9 Tf 52 697 Td (TEGANGAN DAN ARUS) Tj ET
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 676 Td (Vmax) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 676 Td (332.91 V) Tj ET
+BT /F2 9 Tf 330 676 Td (311.13 V) Tj ET
 q 0.82 0.85 0.88 RG 42 671 m 553 671 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 658 Td (Vmin) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 658 Td (-332.91 V) Tj ET
+BT /F2 9 Tf 330 658 Td (-311.13 V) Tj ET
 q 0.82 0.85 0.88 RG 42 653 m 553 653 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 640 Td (Vpp) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 640 Td (665.81 V) Tj ET
+BT /F2 9 Tf 330 640 Td (622.25 V) Tj ET
 q 0.82 0.85 0.88 RG 42 635 m 553 635 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 622 Td (Vrms) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 622 Td (220.54 V) Tj ET
+BT /F2 9 Tf 330 622 Td (220 V) Tj ET
 q 0.82 0.85 0.88 RG 42 617 m 553 617 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 604 Td (Irms) Tj ET
@@ -72,23 +72,23 @@ q 0.82 0.85 0.88 RG 42 526 m 553 526 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 513 Td (Daya semu) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 513 Td (1102.69 VA) Tj ET
+BT /F2 9 Tf 330 513 Td (1100 VA) Tj ET
 q 0.82 0.85 0.88 RG 42 508 m 553 508 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 495 Td (Faktor daya) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 495 Td (0.898) Tj ET
+BT /F2 9 Tf 330 495 Td (0.9) Tj ET
 q 0.82 0.85 0.88 RG 42 490 m 553 490 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 477 Td (THD tegangan) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 477 Td (7 %) Tj ET
+BT /F2 9 Tf 330 477 Td (0 %) Tj ET
 q 0.82 0.85 0.88 RG 42 472 m 553 472 l S Q
 q 0.07 0.15 0.24 rg 42 418 511 19 re f Q
 1 1 1 rg
 BT /F2 9 Tf 52 425 Td (DIAGNOSIS) Tj ET
 0.12 0.18 0.24 rg
-BT /F1 9 Tf 54 404 Td (- HARMONIC DISTORTION) Tj ET
+BT /F1 9 Tf 54 404 Td (- NORMAL \(berdasarkan aturan konfigurasi\)) Tj ET
 q 0.07 0.15 0.24 rg 42 372 511 19 re f Q
 1 1 1 rg
 BT /F2 9 Tf 52 379 Td (KONFIGURASI DAN METODE) Tj ET
@@ -113,5 +113,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-3341
+3355
 %%EOF

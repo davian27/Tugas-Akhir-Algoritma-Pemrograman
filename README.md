@@ -22,7 +22,7 @@ Proyek ini membantu pengguna memahami data hasil pengukuran dengan lebih cepat. 
 | Frekuensi | Perkiraan frekuensi tegangan dari titik lintas nol. |
 | Daya aktif | Rata-rata hasil kali tegangan dan arus pada tiap sampel. |
 | Daya semu | Hasil kali Vrms dan Irms. |
-| Faktor daya | Perbandingan daya aktif dengan daya semu. |
+| Faktor daya (PF) | Perbandingan daya aktif dengan daya semu; ditampilkan dengan label PF. |
 | THD tegangan | Perkiraan distorsi harmonisa tegangan hingga orde yang dikonfigurasi. |
 
 ## Format file CSV

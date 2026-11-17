@@ -292,7 +292,7 @@ void drawMetrics(HDC dc, int top) {
         metricValue(lastResult.currentRms, hasResult),
         metricValue(lastResult.powerFactor, hasResult && lastResult.powerFactorDefined, 3)
     };
-    const wchar_t* units[] = {L"Volt", L"Hz", L"Ampere", L"tanpa satuan"};
+    const wchar_t* units[] = {L"Volt", L"Hz", L"Ampere", L"PF"};
     COLORREF colors[] = {CYAN, GREEN, CYAN, YELLOW};
     for (int i = 0; i < 4; ++i) {
         int x = left + i * (width + gap);
