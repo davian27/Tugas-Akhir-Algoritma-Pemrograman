@@ -1,0 +1,54 @@
+
+Waktu analisis    : 2026-11-09 07:08:09
+POWER QUALITY ANALYZER
+----------------------------------------
+File              : D:\Data Program\2026 Source Code\Semester 3\Tugas Akhir Algoritma Pemkom\sample_harmonic.csv
+Jumlah sampel     : 1000
+Sampling          : 5000.000000 Hz (seragam, toleransi 0,1%)
+
+TEGANGAN DAN ARUS
+Vmax              : 332.905873 V
+Vmin              : -332.905873 V
+Vpp               : 665.811746 V
+Vrms              : 220.538341 V
+Irms              : 5.000000 A
+Frekuensi         : 50.000000 Hz
+Daya aktif        : 989.999998 W
+Daya semu         : 1102.691700 VA
+Faktor daya       : 0.897803
+THD tegangan      : 7.000000 %
+Catatan THD       : DFT proyeksi sampai orde 10; hasil sensitif terhadap kebocoran spektrum dan jendela non-integer-cycle.
+
+DIAGNOSIS
+- HARMONIC DISTORTION
+
+Konfigurasi       : Vnom=220.000000 V, fnom=50.000000 Hz, batas THD=5.000000%
+Metode            : agregat seluruh file; bukan deteksi durasi kejadian.
+----------------------------------------
+
+Waktu analisis    : 2026-11-16 13:35:51
+POWER QUALITY ANALYZER
+----------------------------------------
+File              : D:\Data Program\2026 Source Code\Semester 3\Tugas Akhir Algoritma Pemkom\sample_normal.csv
+Jumlah sampel     : 1000
+Sampling          : 5000.000000 Hz (seragam, toleransi 0,1%)
+
+TEGANGAN DAN ARUS
+Vmax              : 311.126984 V
+Vmin              : -311.126984 V
+Vpp               : 622.253968 V
+Vrms              : 220.000000 V
+Irms              : 5.000000 A
+Frekuensi         : 50.000000 Hz
+Daya aktif        : 989.999997 W
+Daya semu         : 1099.999993 VA
+Faktor daya       : 0.900000
+THD tegangan      : 0.000000 %
+Catatan THD       : DFT proyeksi sampai orde 10; hasil sensitif terhadap kebocoran spektrum dan jendela non-integer-cycle.
+
+DIAGNOSIS
+- NORMAL (berdasarkan aturan konfigurasi)
+
+Konfigurasi       : Vnom=220.000000 V, fnom=50.000000 Hz, batas THD=5.000000%
+Metode            : agregat seluruh file; bukan deteksi durasi kejadian.
+----------------------------------------

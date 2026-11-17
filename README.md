@@ -43,7 +43,7 @@ Waktu sampel harus meningkat dan berjarak seragam (toleransi 0,1%). Minimal dua 
 Kompilasi dengan g++ MinGW-w64 yang mendukung C++17 dari folder proyek:
 
 ```powershell
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic -municode -mwindows src/DataLoader.cpp src/SignalAnalysis.cpp src/PowerAnalysis.cpp src/DisturbanceDetector.cpp src/ReportManager.cpp src/gui_main.cpp -lcomdlg32 -o PowerQualityAnalyzerGUI.exe
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic -municode -mwindows src/AnalysisDatabase.cpp src/DataLoader.cpp src/SignalAnalysis.cpp src/PowerAnalysis.cpp src/DisturbanceDetector.cpp src/ReportManager.cpp src/gui_main.cpp -lcomdlg32 '-Wl,-Bstatic' -lsqlite3 '-Wl,-Bdynamic' -o PowerQualityAnalyzerGUI.exe
 ```
 
 Lalu jalankan:
@@ -52,16 +52,16 @@ Lalu jalankan:
 ./PowerQualityAnalyzerGUI.exe
 ```
 
-Pilih CSV dari panel aplikasi, tekan **Analisis**, lalu lihat ringkasan dan grafik. Halaman **Riwayat** menyimpan daftar analisis selama aplikasi masih berjalan. Tombol **Simpan laporan** menambahkan laporan teks ke `output/analysis.log`; **Ekspor PDF** membuka dialog untuk menentukan lokasi PDF.
+Pilih CSV dari panel aplikasi, tekan **Analisis**, lalu lihat ringkasan dan grafik. Riwayat disimpan ke database lokal `output/analysis_history.sqlite3` dan tetap tersedia setelah aplikasi ditutup. Klik baris riwayat untuk membuka kembali hasil dan grafik; sampel, ringkasan, diagnosis, waktu analisis, dan konfigurasi disimpan bersama. Tombol **Simpan laporan** menambahkan laporan teks ke `output/analysis.log`; **Ekspor PDF** membuka dialog untuk menentukan lokasi PDF.
 
 ## Menjalankan versi console
 
 ```powershell
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic src/DataLoader.cpp src/SignalAnalysis.cpp src/PowerAnalysis.cpp src/DisturbanceDetector.cpp src/ReportManager.cpp src/Config.cpp src/Tests.cpp src/main.cpp -o PowerQualityAnalyzer.exe
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic src/AnalysisDatabase.cpp src/DataLoader.cpp src/SignalAnalysis.cpp src/PowerAnalysis.cpp src/DisturbanceDetector.cpp src/ReportManager.cpp src/Config.cpp src/Tests.cpp src/main.cpp '-Wl,-Bstatic' -lsqlite3 '-Wl,-Bdynamic' -o PowerQualityAnalyzer.exe
 ./PowerQualityAnalyzer.exe
 ```
 
-Menu console menyediakan analisis CSV, self-test, pengaturan ambang, dan keluar. Build Windows melalui CMake menghasilkan aplikasi desktop; pada platform lain, konfigurasi proyek menghasilkan versi console.
+Menu console menyediakan analisis CSV, self-test, pengaturan ambang, dan keluar. Kompilasi manual memerlukan header dan library SQLite; perintah di atas menautkan SQLite secara statis. Untuk build CMake, SQLite development library perlu tersedia di sistem. Build Windows menghasilkan aplikasi desktop; pada platform lain, konfigurasi proyek menghasilkan versi console.
 
 ## Cara membaca diagnosis
 
@@ -76,6 +76,7 @@ THD dihitung dengan proyeksi DFT langsung hingga orde harmonisa yang dikonfigura
 | Berkas | Tanggung jawab |
 |---|---|
 | `src/gui_main.cpp` | Antarmuka desktop, interaksi, grafik, dan riwayat. |
+| `src/AnalysisDatabase.cpp` | Menyimpan dan memuat riwayat serta sampel dari SQLite. |
 | `src/main.cpp` | Menu dan alur versi console. |
 | `src/DataLoader.cpp` | Membaca serta memvalidasi CSV. |
 | `src/SignalAnalysis.cpp` | RMS, nilai puncak, frekuensi, dan THD. |
