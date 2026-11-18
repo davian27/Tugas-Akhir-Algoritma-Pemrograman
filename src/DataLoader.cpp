@@ -1,9 +1,11 @@
 #include "../include/DataLoader.h"
 
 #include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
+#include <limits>
 #include <sstream>
 #include <stdexcept>
 
@@ -18,9 +20,57 @@ std::string trim(const std::string& value) {
 bool parseNumber(const std::string& text, double& value) {
     const std::string cleaned = trim(text);
     if (cleaned.empty()) return false;
+    std::size_t index = 0;
+    if (cleaned[index] == '+' || cleaned[index] == '-') ++index;
+    std::size_t digits = 0;
+    while (index < cleaned.size() && std::isdigit(static_cast<unsigned char>(cleaned[index]))) {
+        ++index;
+        ++digits;
+    }
+    if (index < cleaned.size() && cleaned[index] == '.') {
+        ++index;
+        while (index < cleaned.size() && std::isdigit(static_cast<unsigned char>(cleaned[index]))) {
+            ++index;
+            ++digits;
+        }
+    }
+    if (digits == 0) return false;
+    if (index < cleaned.size() && (cleaned[index] == 'e' || cleaned[index] == 'E')) {
+        ++index;
+        if (index < cleaned.size() && (cleaned[index] == '+' || cleaned[index] == '-')) ++index;
+        const std::size_t exponentStart = index;
+        while (index < cleaned.size() && std::isdigit(static_cast<unsigned char>(cleaned[index]))) ++index;
+        if (index == exponentStart) return false;
+    }
+    if (index != cleaned.size()) return false;
     char* end = nullptr;
     value = std::strtod(cleaned.c_str(), &end);
-    return end != cleaned.c_str() && *end == '\0' && std::isfinite(value);
+    return end == cleaned.c_str() + cleaned.size() && std::isfinite(value);
+}
+
+std::string normalizeHeaderCell(std::string value) {
+    value = trim(value);
+    if (value.size() >= 2 && value.front() == '"' && value.back() == '"')
+        value = value.substr(1, value.size() - 2);
+    std::string normalized;
+    for (unsigned char character : value) {
+        if (std::isspace(character) || character == '_' || character == '(' || character == ')' || character == '/') continue;
+        normalized.push_back(static_cast<char>(std::tolower(character)));
+    }
+    return normalized;
+}
+
+bool isKnownHeader(const std::string (&fields)[4]) {
+    const std::string time = normalizeHeaderCell(fields[0]);
+    const std::string voltage = normalizeHeaderCell(fields[1]);
+    const std::string current = normalizeHeaderCell(fields[2]);
+    const bool timeColumn = time == "waktu" || time == "time" || time == "timestamp" ||
+                            time == "times" || time == "timesec" || time == "timestampsec";
+    const bool voltageColumn = voltage == "tegangan" || voltage == "voltage" || voltage == "v" ||
+                               voltage == "voltagev" || voltage == "teganganv";
+    const bool currentColumn = current == "arus" || current == "current" || current == "i" ||
+                               current == "currenta" || current == "arusa";
+    return timeColumn && voltageColumn && currentColumn;
 }
 }
 
@@ -61,7 +111,7 @@ MeasurementDataset DataLoader::loadCsv(const std::filesystem::path& path) {
         if (!parseNumber(fields[0], sample.timeSeconds) ||
             !parseNumber(fields[1], sample.voltage) ||
             !parseNumber(fields[2], sample.current)) {
-            if (dataset.samples.empty() && isFirstRecord) continue; // Header opsional pada baris pertama non-kosong.
+            if (dataset.samples.empty() && isFirstRecord && isKnownHeader(fields)) continue;
             throw std::runtime_error("Baris " + std::to_string(lineNumber) + ": nilai waktu/tegangan/arus harus numerik dan finite.");
         }
         if (!dataset.samples.empty() && sample.timeSeconds <= dataset.samples.back().timeSeconds) {
@@ -72,14 +122,26 @@ MeasurementDataset DataLoader::loadCsv(const std::filesystem::path& path) {
     if (dataset.samples.size() < 2) throw std::runtime_error("CSV harus berisi minimal 2 sampel numerik.");
 
     const double firstInterval = dataset.samples[1].timeSeconds - dataset.samples[0].timeSeconds;
+    if (!std::isfinite(firstInterval) || firstInterval <= 0.0)
+        throw std::runtime_error("Interval waktu pertama tidak valid atau terlalu besar untuk dihitung.");
     double sumIntervals = 0.0;
     for (std::size_t i = 1; i < dataset.samples.size(); ++i) {
         const double interval = dataset.samples[i].timeSeconds - dataset.samples[i - 1].timeSeconds;
+        if (!std::isfinite(interval) || interval <= 0.0)
+            throw std::runtime_error("Interval waktu antar-sampel tidak valid.");
         sumIntervals += interval;
-        if (std::fabs(interval - firstInterval) > std::max(1e-12, firstInterval * 0.001)) {
+        if (!std::isfinite(sumIntervals))
+            throw std::runtime_error("Rentang waktu terlalu besar untuk dihitung dengan aman.");
+        const double timeScale = std::max(std::fabs(dataset.samples[i].timeSeconds),
+                                          std::fabs(dataset.samples[i - 1].timeSeconds));
+        const double tolerance = std::max(firstInterval * 0.001,
+            std::numeric_limits<double>::epsilon() * timeScale * 8.0);
+        if (std::fabs(interval - firstInterval) > tolerance) {
             throw std::runtime_error("Interval waktu tidak seragam (toleransi 0,1%); analisis frekuensi/THD memerlukan sampling seragam.");
         }
     }
     dataset.sampleRateHz = static_cast<double>(dataset.samples.size() - 1) / sumIntervals;
+    if (!std::isfinite(dataset.sampleRateHz) || dataset.sampleRateHz <= 0.0)
+        throw std::runtime_error("Frekuensi sampling tidak valid; periksa jarak waktu pada CSV.");
     return dataset;
 }

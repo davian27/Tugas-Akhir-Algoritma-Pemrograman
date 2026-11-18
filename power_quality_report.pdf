@@ -16,7 +16,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
 endobj
 6 0 obj
-<< /Length 2849 >>
+<< /Length 2852 >>
 stream
 q 0.09 0.16 0.25 rg 0 790 595 52 re f Q
 q 0.08 0.78 0.83 rg 42 786 3 38 re f Q
@@ -77,7 +77,7 @@ q 0.82 0.85 0.88 RG 42 508 m 553 508 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 495 Td (Faktor daya) Tj ET
 0.12 0.18 0.24 rg
-BT /F2 9 Tf 330 495 Td (0.9) Tj ET
+BT /F2 9 Tf 330 495 Td (0.9 PF) Tj ET
 q 0.82 0.85 0.88 RG 42 490 m 553 490 l S Q
 0.12 0.18 0.24 rg
 BT /F1 9 Tf 54 477 Td (THD tegangan) Tj ET
@@ -113,5 +113,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-3355
+3358
 %%EOF

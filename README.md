@@ -27,7 +27,7 @@ Proyek ini membantu pengguna memahami data hasil pengukuran dengan lebih cepat. 
 
 ## Format file CSV
 
-Gunakan tiga kolom dengan urutan **waktu (detik), tegangan (volt), arus (ampere)**. Pemisah kolom adalah koma. Baris judul boleh disertakan; nilai desimal harus menggunakan titik.
+Gunakan tiga kolom dengan urutan **waktu (detik), tegangan (volt), arus (ampere)**. Pemisah kolom adalah koma. Header boleh dihilangkan; jika digunakan, nama kolom harus dikenali seperti `waktu/time/timestamp`, `tegangan/voltage`, dan `arus/current`. Nilai desimal harus menggunakan titik.
 
 ```csv
 waktu,tegangan,arus
