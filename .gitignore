@@ -1,0 +1,28 @@
+# Build output
+/build/
+/cmake-build-*/
+*.exe
+*.dll
+*.o
+*.obj
+*.a
+*.lib
+*.pdb
+
+# Generated analysis data, logs, reports, and database
+/output/
+*.log
+*.pdf
+*.sqlite
+*.sqlite3
+*.db
+
+# Internal planning and presentation documents
+/PRD_Power_Quality_Analyzer.md
+/gui.md
+/gui.prd
+/PANDUAN_PRESENTASI.md
+
+# Temporary files
+/tmp/
+*.tmp
